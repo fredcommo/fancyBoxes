@@ -10,7 +10,7 @@
 # If not installed yet
 install.packages("devtools")
 require("devtools")
-# a nice package from Brian Bot
+# a nice package by Brian Bot
 install_github("rGithubClient", "brian-bot") 
 ```
 
