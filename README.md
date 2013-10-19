@@ -24,7 +24,6 @@ git <- getRepo('fredcommo/fancyBoxes')
 sourceRepoFile(git, "fancyBox.R")
 
 # Simulate data
-op <- par(no.readonly = TRUE)
 m <- seq(-3, 3, len = 100)
 s <- seq(.2, 2, len = 100)
 n <- 10; p = 1000
@@ -33,6 +32,8 @@ X <- lapply(1:n, function(i){
   return(do.call(c, x))  
 })
 X <- do.call(cbind, X)
+
+op <- par(no.readonly = TRUE)
 
 par(mfrow = c(2, 2))
 boxplot(X, main = "Original boxplot")
