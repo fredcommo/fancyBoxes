@@ -1,14 +1,10 @@
 ###############################
 # fancyBox DEMO
 ###############################
-getFilesList <- function(git, tag = ''){
-  flist <- git@tree$path
-  return(flist[grep(tag, flist)])
-}
 
 require("rGithubClient")
 git <- getRepo('fredcommo/fancyBoxes')
-Rlist <- getFilesList(git, '.R$')
+sourceRepoFile(git, "fancyBox.R")
 
 # Simulate data
 op <- par(no.readonly = TRUE)
@@ -30,3 +26,16 @@ fancyBox(X, lwd = 3, addStat=FALSE, addPts=TRUE,
 fancyBox(X, lwd = 3, xlab = "Some x label", ylab = "Some y label", main = "My fancy boxes\nAdding the quantiles", las = 1)
 legend("topleft", legend = "quantiles", lwd = 3, bty = "n")
 par(op)
+
+# Using Classes
+n = 10; p = 1000
+Class <- rep(LETTERS[1:n], each = p/n)
+X <- lapply(1:n, function(i) rnorm(p/n, sample(m, 1), sample(s, 1)))
+X <- do.call(c, X)  
+par(mfrow = c(1, 2))
+boxplot(X ~ Class, main = "Original boxplot")
+fancyBox(X, Class, lwd = 3, 
+         xlab = "Some x label", ylab = "Some y label", main = "My fancy boxes", las = 1)
+legend("topleft", legend = "quantiles", lwd = 3, bty = "n")
+par(op)
+
