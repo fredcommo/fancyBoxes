@@ -1,5 +1,5 @@
 .addpts <- function(x, y, s, col){
-  points(rnorm(length(y), x, s), y, cex = 1/log(length(y)), col = col)
+  points(rnorm(length(y), x, s), y, cex = 2/log(length(y)), col = col)
 }
 .addstats <- function(x, y, d, col = rgb(.2, .2, .2, .85),...){
   q <- quantile(y, probs = c(.25, .5, .75), na.rm = TRUE)
@@ -23,7 +23,7 @@ fancyBox <- function(X, Class = NULL, l = 3, addPts = TRUE, addStat = TRUE,
                      boxcol = {n = ifelse(is.null(Class), ncol(X), nlevels(as.factor(Class)))
                                addCols(n, 1)},
                      pcol = {n = ifelse(is.null(Class), ncol(X), nlevels(as.factor(Class)))
-                             addCols(n, .25)},
+                             addCols(n, .5)},
                      ylim = range(X, na.rm = TRUE)*1.25, ...){
   # X: a matrix (or data frame) of values, in columns
   # l: a coefficient to adjust the box widths. Increasing this value will reduce the width.
@@ -35,7 +35,7 @@ fancyBox <- function(X, Class = NULL, l = 3, addPts = TRUE, addStat = TRUE,
     boxplot(X, border = NA, ylim = ylim,...)
     n <- ncol(X)
     if(addPts)
-      for(i in 1:n) .addpts(i, X[,i], 1/n, pcol[i])
+      for(i in 1:n) .addpts(i, X[,i], .1, pcol[i])
     if(addStat)
       for(i in 1:n) .addstats(i, X[,i], 1/l,...)
     for(i in 1:n) .addlines(i, X[,i], l, col = boxcol[i], ...)
@@ -45,7 +45,7 @@ fancyBox <- function(X, Class = NULL, l = 3, addPts = TRUE, addStat = TRUE,
     boxplot(X ~ Class, border = NA, ylim = ylim,...)
     n <- nlevels(Class)
     if(addPts)
-      for(i in 1:n) .addpts(i, X[Class == levels(Class)[i]], 1/n, pcol[i])
+      for(i in 1:n) .addpts(i, X[Class == levels(Class)[i]], .1, pcol[i])
     if(addStat)
       for(i in 1:n) .addstats(i, X[Class == levels(Class)[i]], 1/l,...)
     for(i in 1:n) .addlines(i, X[Class == levels(Class)[i]], l, col = boxcol[i], ...)    
