@@ -9,12 +9,14 @@
            y1=c(q[1], q[2], q[3], q[3]), col = col, ...)
 }
 .addlines <- function(x, y, l, col,...){
-  d <- density(y, na.rm = TRUE)
-  dy <- d$y/max(d$y)*1/l
-  x1 <- x+dy
-  x2 <- x-dy
-  lines(x1, d$x, col = col,...)
-  lines(x2, d$x, col = col,...)
+  if(length(y)>1){
+    d <- density(y, na.rm = TRUE)
+    dy <- d$y/max(d$y)*1/l
+    x1 <- x+dy
+    x2 <- x-dy
+    lines(x1, d$x, col = col,...)
+    lines(x2, d$x, col = col,...)
+  }
 }
 addCols <- function(n, a){
   rgb(seq(0, 1, len = n), .2, seq(1, 0, len = n), a)
